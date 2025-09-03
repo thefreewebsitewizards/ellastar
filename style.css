@@ -1625,6 +1625,35 @@ body {
     box-shadow: 0 10px 30px rgba(135, 206, 235, 0.3);
 }
 
+.btn-join:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Mobile-specific form styles */
+@media (max-width: 768px) {
+    .contact-form-container {
+        padding: 20px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 0;
+    }
+    
+    .btn-join {
+        width: 100%;
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+}
+
 /* Responsive Design for Contact - Integrated with main responsive framework */
 
 /* Footer */

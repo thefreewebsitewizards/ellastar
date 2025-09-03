@@ -318,7 +318,7 @@ const debouncedScrollHandler = debounce(() => {
 
 window.addEventListener('scroll', debouncedScrollHandler);
 
-// Contact form submission handler
+// Handle contact form submission
 const contactForm = document.querySelector('.contact-form');
 
 if (contactForm) {
@@ -333,16 +333,14 @@ if (contactForm) {
         }
         
         // Create email body
-        let emailBody = `Contact Form Submission:
-
-`;
+        let emailBody = `Contact Form Submission:\n\n`;
         emailBody += `Name: ${data.firstName} ${data.lastName}\n`;
         emailBody += `Email: ${data.email}\n`;
         emailBody += `Phone: ${data.phone}\n`;
         emailBody += `Message: ${data.message}\n`;
         
         // Create Gmail compose link
-        const subject = encodeURIComponent('Contact Form - Work Together');
+        const subject = encodeURIComponent('Contact Form Submission');
         const body = encodeURIComponent(emailBody);
         const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=Ella.starr@hotmail.com&su=${subject}&body=${body}`;
         
@@ -371,8 +369,8 @@ if (contactForm) {
         
         // Show success message with mobile-friendly text
         const successMessage = isMobile 
-            ? 'Thank you for reaching out! Your default email app will open with your message pre-filled. If it doesn\'t open automatically, please check for a new browser tab with Gmail.'
-            : 'Thank you for reaching out! Gmail will open in a new tab with your message pre-filled. Please review and send the email to complete your enquiry.';
+            ? 'Thank you for reaching out! Your default email app will open with the contact details pre-filled. If it doesn\'t open automatically, please check for a new browser tab with Gmail.'
+            : 'Thank you for reaching out! Gmail will open in a new tab with your contact details pre-filled. Please review and send the email to complete your enquiry.';
         
         alert(successMessage);
         
