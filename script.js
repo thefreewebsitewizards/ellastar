@@ -117,19 +117,12 @@ if (contactForm) {
             `Best regards,\n${fullName}`
         );
         
-        // Create Gmail compose URL for direct web interface access
-        const gmailUrl = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=Ella.starr@hotmail.com&su=${subject}&body=${body}&tf=1`;
+        // Create mailto URL for universal compatibility across all devices
+        const mailtoUrl = `mailto:Ella.starr@hotmail.com?subject=${subject}&body=${body}`;
         
-        // Open Gmail in a new tab
-        try {
-            window.open(gmailUrl, '_blank');
-            showNotification('Opening Gmail...', 'success');
-        } catch (error) {
-            // Fallback: try mailto if Gmail web interface fails
-            const mailtoUrl = `mailto:Ella.starr@hotmail.com?subject=${subject}&body=${body}`;
-            window.location.href = mailtoUrl;
-            showNotification('Opening your email client...', 'success');
-        }
+        // Use mailto protocol which works on both desktop and mobile
+        window.location.href = mailtoUrl;
+        showNotification('Opening your email client...', 'success');
         
         // Reset form after redirect
         setTimeout(() => {
