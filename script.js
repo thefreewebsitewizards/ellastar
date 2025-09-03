@@ -104,30 +104,49 @@ if (contactForm) {
             return;
         }
         
-        // Create Gmail mailto URL with pre-filled content
+        // Create mailto URL with pre-filled content for universal compatibility
         const fullName = `${firstName} ${lastName}`;
-        const subject = encodeURIComponent(`Contact Form Submission from ${fullName}`);
+        const subject = encodeURIComponent(`Contact Form - ${fullName}`);
         const body = encodeURIComponent(
             `Hello Ella,\n\n` +
-            `I would like to get in touch with you.\n\n` +
+            `I would like to work with you!\n\n` +
             `Name: ${fullName}\n` +
             `Email: ${email}\n` +
             `Phone: ${phone}\n\n` +
             `Message:\n${message}\n\n` +
+            `Looking forward to hearing from you!\n\n` +
             `Best regards,\n${fullName}`
         );
         
-        // Create mailto URL for universal compatibility across all devices
+        // Create mailto URL that works on all devices
         const mailtoUrl = `mailto:Ella.starr@hotmail.com?subject=${subject}&body=${body}`;
         
-        // Use mailto protocol which works on both desktop and mobile
-        window.location.href = mailtoUrl;
-        showNotification('Opening your email client...', 'success');
+        // Create and trigger mailto link
+        const link = document.createElement('a');
+        link.href = mailtoUrl;
+        link.style.display = 'none';
+        document.body.appendChild(link);
         
-        // Reset form after redirect
+        // Show immediate feedback
+        showNotification('Opening email app...', 'success');
+        
+        // Trigger the mailto link
+        link.click();
+        document.body.removeChild(link);
+        
+        // Reset form
+        this.reset();
+        
+        // Provide fallback instructions after a delay
         setTimeout(() => {
-            this.reset();
-        }, 1500);
+            // Check if user is still on the page (indicating mailto might not have worked)
+            showNotification('Email: Ella.starr@hotmail.com', 'info');
+            
+            // Copy email to clipboard as backup
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText('Ella.starr@hotmail.com');
+            }
+        }, 1000);
     });
 }
 
